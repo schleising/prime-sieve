@@ -19,7 +19,7 @@ type PrimeSieve struct {
 	stopIndex int
 
 	// List of candidates
-	initialCandidates []int
+	initialCandidates []bool
 }
 
 // Create a new prime sieve
@@ -28,20 +28,20 @@ func NewPrimeSieve(upperBound int) *PrimeSieve {
 	println("Creating a new prime sieve with an upper bound of", upperBound)
 
 	// Create a list of candidates where the index is the number and the value is 1 if it is still a candidate and 0 if it is not
-	candidates := make([]int, upperBound+1)
+	candidates := make([]bool, upperBound+1)
 
 	// Set all candidates to 1
 	for i := 0; i < len(candidates); i++ {
-		candidates[i] = 1
+		candidates[i] = true
 	}
 
 	// Set 0 and 1 to 0
-	candidates[0] = 0
-	candidates[1] = 0
+	candidates[0] = false
+	candidates[1] = false
 
 	// Set all multiples of 2 to 0
 	for i := 4; i < len(candidates); i += 2 {
-		candidates[i] = 0
+		candidates[i] = false
 	}
 
 	// Create a new prime sieve
@@ -57,20 +57,20 @@ func NewPrimeSieve(upperBound int) *PrimeSieve {
 }
 
 // Find all primes
-func (primeSieve *PrimeSieve) FindPrimes() []int {
+func (primeSieve *PrimeSieve) FindPrimes() []bool {
 	// Set the current index
 	currentIndex := primeSieve.startIndex
 
 	// Set the candidates to be a copy of the initial candidates
-	candidates := make([]int, len(primeSieve.initialCandidates))
+	candidates := make([]bool, len(primeSieve.initialCandidates))
 	copy(candidates, primeSieve.initialCandidates)
 
 	for currentIndex <= primeSieve.stopIndex {
 		// If the current index is a candidate
-		if candidates[currentIndex] == 1 {
+		if candidates[currentIndex] {
 			// Set all multiples of the current index to 0
 			for i := currentIndex * 2; i < len(candidates); i += currentIndex {
-				candidates[i] = 0
+				candidates[i] = false
 			}
 		}
 
@@ -83,14 +83,14 @@ func (primeSieve *PrimeSieve) FindPrimes() []int {
 }
 
 // Function to turn a list of candidates into a list of primes
-func ReturnPrimes(candidates []int) []int {
+func ReturnPrimes(candidates []bool) []int {
 	// Create a list of primes
 	primes := make([]int, 0)
 
 	// Loop through the candidates
 	for i := 0; i < len(candidates); i++ {
 		// If the current index is a candidate
-		if candidates[i] == 1 {
+		if candidates[i] {
 			// Add it to the list of primes
 			primes = append(primes, i)
 		}
@@ -112,7 +112,7 @@ func main() {
 	startTime := time.Now()
 
 	// Initialise an empty list of primes
-	primes := make([]int, 0)
+	primes := make([]bool, 0)
 
 	// Loop until 5 seconds have passed
 	for time.Since(startTime).Seconds() < 5 {

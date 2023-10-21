@@ -16,17 +16,17 @@ class PrimeSieve:
         self._current = self._start
 
         # Initialise an array of integers to store the candidates
-        self._initial_candidates = [1] * (self._upper_limit + 1)
+        self._initial_candidates = [True] * (self._upper_limit + 1)
 
         # Set the first two values to zero
-        self._initial_candidates[0] = 0
-        self._initial_candidates[1] = 0
+        self._initial_candidates[0] = False
+        self._initial_candidates[1] = False
 
         # Set the even numbers to zero
         for number in range(4, self._upper_limit + 1, 2):
-            self._initial_candidates[number] = 0
+            self._initial_candidates[number] = False
 
-    def find_primes(self) -> list[int]:
+    def find_primes(self) -> list[bool]:
         # Reinitialise the current value
         self._current = self._start
 
@@ -37,7 +37,7 @@ class PrimeSieve:
         while self._current <= self._stop:
             # Set the multiples of the current value to zero
             for number in range(self._current * 2, self._upper_limit + 1, self._current):
-                self._candidates[number] = 0
+                self._candidates[number] = False
 
             # Find the next non-zero value
             self._current += 2
@@ -49,7 +49,7 @@ class PrimeSieve:
 
     def return_primes(self) -> list[int]:
         # Return the primes
-        return [index for index, value in enumerate(self._candidates) if value != 0]
+        return [index for index, value in enumerate(self._candidates) if value == True]
 
 if __name__ == '__main__':
     # Initialise a variable to store the upper limit
