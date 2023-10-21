@@ -65,8 +65,15 @@ impl Sieve {
 
 // The main function.
 fn main() {
+    // Set the upper bound.
+    let upper_bound: u64 = 10000000;
+
+    // Print that this is the Rust version and the upper bound.
+    println!("Rust version");
+    println!("Upper bound: {}", upper_bound.to_formatted_string(&Locale::en));
+
     // Create a new Sieve structure.
-    let mut sieve: Sieve = Sieve::new(10000000);
+    let mut sieve: Sieve = Sieve::new(upper_bound);
 
     // Run for 5 seconds.
     let now = std::time::Instant::now();
@@ -85,12 +92,12 @@ fn main() {
         iterations += 1;
     }
 
-    // Print that this is the Rust version.
-    println!("Rust version");
-
     // Print the number of primes.
-    println!("Primes:     {}", primes.iter().filter(|&x| *x).count().to_formatted_string(&Locale::en));
+    println!("Primes:      {}", primes.iter().filter(|&x| *x).count().to_formatted_string(&Locale::en));
 
     // Print the number of iterations with commas as thousands separators.
-    println!("Iterations: {}", iterations.to_formatted_string(&Locale::en));
+    println!("Iterations:  {}", iterations.to_formatted_string(&Locale::en));
+
+    // Print a newline.
+    println!();
 }

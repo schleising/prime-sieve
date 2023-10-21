@@ -24,9 +24,6 @@ type PrimeSieve struct {
 
 // Create a new prime sieve
 func NewPrimeSieve(upperBound int) *PrimeSieve {
-	// Print that we are creating a new prime sieve
-	println("Creating a new prime sieve with an upper bound of", upperBound)
-
 	// Create a list of candidates where the index is the number and the value is 1 if it is still a candidate and 0 if it is not
 	candidates := make([]bool, upperBound+1)
 
@@ -102,8 +99,17 @@ func ReturnPrimes(candidates []bool) []int {
 
 // Main function
 func main() {
+	// Set the upper bound
+	upperBound := 10000000
+
+	// Print that this is the Go version and the upper bound
+	// Create a printer
+	p := message.NewPrinter(language.English)
+	println("Go version")
+	p.Printf("Upper bound: %v\n", upperBound)
+
 	// Create a new prime sieve
-	primeSieve := NewPrimeSieve(10000000)
+	primeSieve := NewPrimeSieve(upperBound)
 
 	// Run the find primes function continuously for 5 seconds counting the number of times it runs
 	iterations := 0
@@ -123,15 +129,12 @@ func main() {
 		iterations++
 	}
 
-	// Print that this is the Go version
-	println("Go version")
-
-	// Create a printer
-	p := message.NewPrinter(language.English)
-
 	// Print the number of primes
-	p.Printf("Primes:     %v\n", len(ReturnPrimes(primes)))
+	p.Printf("Primes:      %v\n", len(ReturnPrimes(primes)))
 
 	// Print the number of iterations with a comma as a thousands separator
-	p.Printf("Iterations: %v\n", iterations)
+	p.Printf("Iterations:  %v\n", iterations)
+
+	// Print a blank line
+	println()
 }

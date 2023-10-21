@@ -55,6 +55,10 @@ if __name__ == '__main__':
     # Initialise a variable to store the upper limit
     upper_limit = 10000000
 
+    # Print that this is the Python version and the upper limit
+    print('Python version')
+    print(f'Upper bound: {upper_limit:,}')
+
     # Create a new prime sieve
     prime_sieve = PrimeSieve(upper_limit)
 
@@ -81,11 +85,11 @@ if __name__ == '__main__':
     # Reduce primes to a list of non-zero values
     primes = prime_sieve.return_primes()
 
-    # Print that this is the Python version
-    print('Python version')
-
     # Print the number of primes
-    print(f'Primes:     {len(primes):,}')
+    print(f'Primes:      {len(primes):,}')
 
     # Print the number of iterations
-    print(f'Iterations: {iterations:,}')
+    print(f'Iterations:  {iterations:,}')
+
+    # Print a blank line
+    print()
