@@ -1,7 +1,8 @@
 #!/bin/zsh
 
 # Run the C++ version
-g++ -O3 -DNDEBUG prime-sieve.cpp -o ./C++/prime-sieve
+mkdir -p ./C++
+clang++ -O3 -DNDEBUG prime-sieve.cpp -o ./C++/prime-sieve
 
 # Build the Go code
 go build -ldflags="-w -s" -o ./go/prime-sieve prime-sieve.go
