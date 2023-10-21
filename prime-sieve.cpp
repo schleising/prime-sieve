@@ -8,12 +8,19 @@ using namespace std;
 class PrimeSieve {
 public:
     PrimeSieve(int n) {
+        // Set the upper bound
+        upper_bound = n;
+
+        // Set the start and end indices
+        start_index = 3;
+        end_index = sqrt(n);
+
         for (int i = 0; i < n; i++) {
             sieve.push_back(true);
         }
         sieve[0] = false;
         sieve[1] = false;
-        for (int i = 2; i < sieve.size(); i += 2) {
+        for (int i = 4; i < sieve.size(); i += 2) {
             sieve[i] = false;
         }
     }
@@ -24,7 +31,7 @@ public:
         vector<bool> copy = sieve;
 
         // Go through the sieve and cross out all multiples of each prime
-        for (int i = 2; i < sqrt(copy.size()); i++) {
+        for (int i = start_index; i < end_index; i++) {
             if (copy[i]) {
                 for (int j = i * 2; j < copy.size(); j += i) {
                     copy[j] = false;
@@ -32,13 +39,13 @@ public:
             }
         }
 
-        // Set 2 to be prime
-        copy[2] = true;
-
         return copy;
     }
 
 private:
+    int upper_bound;
+    int start_index;
+    int end_index;
     vector<bool> sieve;
 };
 
