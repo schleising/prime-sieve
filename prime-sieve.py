@@ -12,9 +12,6 @@ class PrimeSieve:
         # Set the stop value for the sieve
         self._stop = int(self._upper_limit ** 0.5)
 
-        # Set the current value for the sieve
-        self._current = self._start
-
         # Initialise an array of integers to store the candidates
         self._initial_candidates = [True] * (self._upper_limit + 1)
 
@@ -27,22 +24,15 @@ class PrimeSieve:
             self._initial_candidates[number] = False
 
     def find_primes(self) -> list[bool]:
-        # Reinitialise the current value
-        self._current = self._start
-
         # Create a copy of the initial candidates
         self._candidates = self._initial_candidates.copy()
 
         # Starting at 3, set the multiples of the current value to zero
-        while self._current <= self._stop:
-            # Set the multiples of the current value to zero
-            for number in range(self._current * 2, self._upper_limit + 1, self._current):
-                self._candidates[number] = False
-
-            # Find the next non-zero value
-            self._current += 2
-            while self._current <= self._stop and self._candidates[self._current] == 0:
-                self._current += 2
+        for i in range(self._start,  self._stop + 1, 2):
+            if self._candidates[i] == True:
+                # Set the multiples of the current value to zero
+                for j in range(i * 2, self._upper_limit + 1, i):
+                    self._candidates[j] = False
 
         # Return the candidates
         return self._candidates
