@@ -44,7 +44,7 @@ func NewPrimeSieve(upperBound int) *PrimeSieve {
 	// Create a new prime sieve
 	primeSieve := &PrimeSieve{
 		upperBound:        upperBound,
-		startIndex:        2,
+		startIndex:        3,
 		stopIndex:         int(math.Sqrt(float64(upperBound))),
 		initialCandidates: candidates,
 	}
@@ -55,24 +55,18 @@ func NewPrimeSieve(upperBound int) *PrimeSieve {
 
 // Find all primes
 func (primeSieve *PrimeSieve) FindPrimes() []bool {
-	// Set the current index
-	currentIndex := primeSieve.startIndex
-
 	// Set the candidates to be a copy of the initial candidates
 	candidates := make([]bool, len(primeSieve.initialCandidates))
 	copy(candidates, primeSieve.initialCandidates)
 
-	for currentIndex <= primeSieve.stopIndex {
+	for i := primeSieve.startIndex; i <= primeSieve.stopIndex; i += 2 {
 		// If the current index is a candidate
-		if candidates[currentIndex] {
+		if candidates[i] {
 			// Set all multiples of the current index to 0
-			for i := currentIndex * 2; i < len(candidates); i += currentIndex {
-				candidates[i] = false
+			for j := i * 2; j < len(candidates); j += i {
+				candidates[j] = false
 			}
 		}
-
-		// Increment the current index
-		currentIndex++
 	}
 
 	// Return the candidates
