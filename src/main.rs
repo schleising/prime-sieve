@@ -42,7 +42,7 @@ impl Sieve {
     }
 
     // Set indexes which are not prime to false
-    fn mark_sieve(&mut self) -> Vec<bool> {
+    fn mark_sieve(&self) -> Vec<bool> {
         // Create a copy of the sieve.
         let mut sieve: Vec<bool> = self.initial_candidates.clone();
 
@@ -73,7 +73,7 @@ fn main() {
     println!("Upper bound: {}", upper_bound.to_formatted_string(&Locale::en));
 
     // Create a new Sieve structure.
-    let mut sieve: Sieve = Sieve::new(upper_bound);
+    let sieve: Sieve = Sieve::new(upper_bound);
 
     // Run for 5 seconds.
     let now = std::time::Instant::now();
