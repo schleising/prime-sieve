@@ -1,5 +1,10 @@
 #!/bin/zsh
 
+# Remove the old executables
+rm -rf ./C++
+rm -rf ./go
+rm -rf ./target
+
 # Run the C++ version
 mkdir -p ./C++
 clang++ -O3 -DNDEBUG prime-sieve.cpp -o ./C++/prime-sieve
