@@ -56,8 +56,8 @@ int main() {
     int upper_bound = 10000000;
 
     // Print that this is the C++ version and the upper bound
-    cout << "C++ version" << endl;
-    cout << "Upper bound: " << upper_bound << endl;
+    cout << "C++ version" << endl << endl;
+    cout << "Upper bound: " << upper_bound << endl << endl;
 
     PrimeSieve sieve(upper_bound);
 
@@ -87,13 +87,13 @@ int main() {
     }
 
     // Print the number of primes
-    cout << "Primes:      " << count << endl;
+    cout << "Primes:      " << count << endl << endl;
 
     // Print the number of iterations
-    cout << "Iterations:  " << iterations << endl;
+    cout << "Iterations:  " << iterations << endl << endl;
 
     // Print a blank line
-    cout << endl;
+    cout << endl << endl;
 
     return 0;
 }

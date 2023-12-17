@@ -47,7 +47,9 @@ if __name__ == '__main__':
 
     # Print that this is the Python version and the upper limit
     print('Python version')
+    print()
     print(f'Upper bound: {upper_limit:,}')
+    print()
 
     # Create a new prime sieve
     prime_sieve = PrimeSieve(upper_limit)
@@ -77,9 +79,11 @@ if __name__ == '__main__':
 
     # Print the number of primes
     print(f'Primes:      {len(primes):,}')
+    print()
 
     # Print the number of iterations
     print(f'Iterations:  {iterations:,}')
+    print()
 
     # Print a blank line
     print()

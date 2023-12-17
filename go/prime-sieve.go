@@ -99,8 +99,8 @@ func main() {
 	// Print that this is the Go version and the upper bound
 	// Create a printer
 	p := message.NewPrinter(language.English)
-	println("Go version")
-	p.Printf("Upper bound: %v\n", upperBound)
+	p.Printf("Go version\n\n")
+	p.Printf("Upper bound: %v\n\n", upperBound)
 
 	// Create a new prime sieve
 	primeSieve := NewPrimeSieve(upperBound)
@@ -124,10 +124,10 @@ func main() {
 	}
 
 	// Print the number of primes
-	p.Printf("Primes:      %v\n", len(ReturnPrimes(primes)))
+	p.Printf("Primes:      %v\n\n", len(ReturnPrimes(primes)))
 
 	// Print the number of iterations with a comma as a thousands separator
-	p.Printf("Iterations:  %v\n", iterations)
+	p.Printf("Iterations:  %v\n\n", iterations)
 
 	// Print a blank line
 	p.Println()

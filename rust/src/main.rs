@@ -28,6 +28,7 @@ impl Sieve {
 
         // Print the stop index.
         println!("Stop index    : {}", stop_index.to_formatted_string(&Locale::en));
+        println!();
 
         // Create a list of booleans of size upperBound.
         let mut initial_candidates = vec![true; upper_bound as usize];
@@ -120,7 +121,9 @@ fn main() {
 
     // Print that this is the Rust version and the upper bound.
     println!("Rust version");
+    println!();
     println!("Upper bound   : {}", upper_bound.to_formatted_string(&Locale::en));
+    println!();
 
     // Create a new Sieve structure.
     let sieve: Sieve = Sieve::new(upper_bound);
@@ -144,10 +147,12 @@ fn main() {
     }
 
     // Print that this is the iterator version.
-    println!("Iterator version");
+    println!("### Iterator version");
+    println!();
 
     // Print the number of primes.
     println!("Primes        : {}", primes.iter().filter(|&x| *x).count().to_formatted_string(&Locale::en));
+    println!();
 
     // Print the prime numbers on a single line.
     if cfg!(debug_assertions) {
@@ -162,6 +167,7 @@ fn main() {
 
     // Print the number of iterations with commas as thousands separators.
     println!("Iterations    : {}", iterations.to_formatted_string(&Locale::en));
+    println!();
 
     // Reset the start time and iterations.
     let start: Instant = Instant::now();
@@ -177,10 +183,12 @@ fn main() {
     }
 
     // Print that this is the loop version.
-    println!("Loop version");
+    println!("### Loop version");
+    println!();
 
     // Print the number of primes.
     println!("Primes        : {}", primes.iter().filter(|&x| *x).count().to_formatted_string(&Locale::en));
+    println!();
 
     // Print the prime numbers on a single line.
     if cfg!(debug_assertions) {
@@ -195,7 +203,9 @@ fn main() {
 
     // Print the number of iterations with commas as thousands separators.
     println!("Iterations    : {}", iterations.to_formatted_string(&Locale::en));
+    println!();
 
     // Print a newline.
+    println!();
     println!();
 }
