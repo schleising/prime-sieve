@@ -13,7 +13,7 @@ public:
 
         // Set the start and end indices
         start_index = 3;
-        end_index = sqrt(n);
+        end_index = sqrt(n) + 1;
 
         for (int i = 0; i < n; i++) {
             sieve.push_back(true);
@@ -31,9 +31,9 @@ public:
         vector<bool> copy = sieve;
 
         // Go through the sieve and cross out all multiples of each prime
-        for (int i = start_index; i < end_index; i++) {
+        for (int i = start_index; i < end_index; i += 2) {
             if (copy[i]) {
-                for (int j = i * 2; j < copy.size(); j += i) {
+                for (int j = i * i; j < copy.size(); j += i * 2) {
                     copy[j] = false;
                 }
             }

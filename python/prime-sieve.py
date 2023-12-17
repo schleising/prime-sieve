@@ -10,7 +10,7 @@ class PrimeSieve:
         self._start = 3
 
         # Set the stop value for the sieve
-        self._stop = int(self._upper_limit ** 0.5)
+        self._stop = int(self._upper_limit ** 0.5) + 1
 
         # Initialise an array of integers to store the candidates
         self._initial_candidates = [True] * (self._upper_limit + 1)
@@ -28,10 +28,10 @@ class PrimeSieve:
         self._candidates = self._initial_candidates.copy()
 
         # Starting at 3, set the multiples of the current value to zero
-        for i in range(self._start,  self._stop + 1, 2):
+        for i in range(self._start,  self._stop, 2):
             if self._candidates[i] == True:
                 # Set the multiples of the current value to zero
-                for j in range(i * 2, self._upper_limit + 1, i):
+                for j in range(i * i, self._upper_limit + 1, i * 2):
                     self._candidates[j] = False
 
         # Return the candidates
