@@ -7,7 +7,7 @@ rm -rf ./rust/target
 
 # Run the C++ version
 mkdir -p ./cpp/C++
-clang++ -O3 -DNDEBUG ./cpp/prime-sieve.cpp -o ./cpp/C++/prime-sieve
+g++ -O3 -std=gnu++20 -DNDEBUG ./cpp/prime-sieve.cpp -o ./cpp/C++/prime-sieve
 
 # Change to the Go directory
 cd ./go
