@@ -67,16 +67,9 @@ impl Sieve {
             if sieve[i as usize] {
                 // Set all multiples of the number to false using an iterator.
                 sieve.iter_mut()
-                    .enumerate()
                     .skip((i * i) as usize)
                     .step_by((i * 2) as usize)
-                    .inspect(|_x| {
-                        #[cfg(debug_assertions)]
-                        println!("After step_by : {:?}", _x);
-                    })
-                    .for_each(|(_item, x)| {
-                        #[cfg(debug_assertions)]
-                        println!("In for_each   : Setting {} to false", _item);
+                    .for_each(|x| {
                         *x = false
                     });
             }
