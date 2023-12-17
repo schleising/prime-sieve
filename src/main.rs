@@ -1,11 +1,11 @@
 // Import the num_format crate.
 use num_format::{Locale, ToFormattedString};
 
+// Import Instant from the standard library.
+use std::time::Instant;
+
 // Create a structure for the sieve.
 struct Sieve {
-    // The upper limit of the sieve.
-    upper_bound: u64,
-
     // The starting index of the sieve.
     start_index: u64,
 
@@ -20,6 +20,15 @@ struct Sieve {
 impl Sieve {
     // Create a new Sieve structure.
     fn new(upper_bound: u64) -> Sieve {
+        // The start index is 3.
+        let start_index: u64 = 3u64;
+
+        // The stop index is the square root of the upper bound.
+        let stop_index: u64 = (upper_bound as f64).sqrt() as u64 + 1u64;
+
+        // Print the stop index.
+        println!("Stop index    : {}", stop_index.to_formatted_string(&Locale::en));
+
         // Create a list of booleans of size upperBound.
         let mut initial_candidates = vec![true; upper_bound as usize];
 
@@ -28,15 +37,15 @@ impl Sieve {
         initial_candidates[1] = false;
 
         // Set all multiples of 2 to false.
-        for i in (4..upper_bound).step_by(2) {
+        for i in (start_index + 1u64..upper_bound).step_by(2usize) {
             initial_candidates[i as usize] = false;
         }
 
+
         // Create a new Sieve structure.
         Sieve {
-            upper_bound,
-            start_index: 3,
-            stop_index: (upper_bound as f64).sqrt() as u64,
+            start_index,
+            stop_index,
             initial_candidates,
         }
     }
@@ -48,12 +57,27 @@ impl Sieve {
 
         // Loop through the sieve.
         for i in (self.start_index..self.stop_index).step_by(2) {
+            #[cfg(debug_assertions)]
+            println!("---------------------------");
+            #[cfg(debug_assertions)]
+            println!("i             : {}", i);
+
             // If the number is prime.
             if sieve[i as usize] {
-                // Set all multiples of the current prime number to false.
-                for j in (i * i..self.upper_bound).step_by(i as usize) {
-                    sieve[j as usize] = false;
-                }
+                // Set all multiples of the number to false using an iterator.
+                sieve.iter_mut()
+                    .enumerate()
+                    .skip((i * i) as usize)
+                    .step_by((i * 2) as usize)
+                    .inspect(|_x| {
+                        #[cfg(debug_assertions)]
+                        println!("After step_by : {:?}", _x);
+                    })
+                    .for_each(|(_item, x)| {
+                        #[cfg(debug_assertions)]
+                        println!("In for_each   : Setting {} to false", _item);
+                        *x = false
+                    });
             }
         }
 
@@ -70,13 +94,13 @@ fn main() {
 
     // Print that this is the Rust version and the upper bound.
     println!("Rust version");
-    println!("Upper bound: {}", upper_bound.to_formatted_string(&Locale::en));
+    println!("Upper bound   : {}", upper_bound.to_formatted_string(&Locale::en));
 
     // Create a new Sieve structure.
     let sieve: Sieve = Sieve::new(upper_bound);
 
     // Run for 5 seconds.
-    let now = std::time::Instant::now();
+    let start: Instant = Instant::now();
 
     // Create an empty array for the primes
     let mut primes: Vec<bool> = Vec::new();
@@ -84,7 +108,7 @@ fn main() {
     // Initialise a counter for the number of iterations
     let mut iterations: u64 = 0;
 
-    while std::time::Instant::now().duration_since(now).as_secs() < 5 {
+    while Instant::now().duration_since(start).as_secs() < 5 {
         // Mark the sieve.
         primes = sieve.mark_sieve();
 
@@ -93,10 +117,21 @@ fn main() {
     }
 
     // Print the number of primes.
-    println!("Primes:      {}", primes.iter().filter(|&x| *x).count().to_formatted_string(&Locale::en));
+    println!("Primes        : {}", primes.iter().filter(|&x| *x).count().to_formatted_string(&Locale::en));
+
+    // Print the prime numbers on a single line.
+    if cfg!(debug_assertions) {
+        print!("Prime nums    : ");
+        primes.iter().enumerate().for_each(|(i, x)| {
+            if *x {
+                print!("{} ", i);
+            }
+        });
+        println!();
+    }
 
     // Print the number of iterations with commas as thousands separators.
-    println!("Iterations:  {}", iterations.to_formatted_string(&Locale::en));
+    println!("Iterations    : {}", iterations.to_formatted_string(&Locale::en));
 
     // Print a newline.
     println!();
