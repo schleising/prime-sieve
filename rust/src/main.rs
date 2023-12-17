@@ -51,7 +51,7 @@ impl Sieve {
     }
 
     // Set indexes which are not prime to false
-    fn mark_sieve(&self) -> Vec<bool> {
+    fn mark_sieve_iterator(&self) -> Vec<bool> {
         // Create a copy of the sieve.
         let mut sieve: Vec<bool> = self.initial_candidates.clone();
 
@@ -85,6 +85,32 @@ impl Sieve {
         sieve
     }
 
+    fn mark_sieve_loop(&self) -> Vec<bool> {
+        // Create a copy of the sieve.
+        let mut sieve: Vec<bool> = self.initial_candidates.clone();
+
+        // Loop through the sieve.
+        for i in (self.start_index..self.stop_index).step_by(2) {
+            #[cfg(debug_assertions)]
+            println!("---------------------------");
+            #[cfg(debug_assertions)]
+            println!("i             : {}", i);
+
+            // If the number is prime.
+            if sieve[i as usize] {
+                // Set all multiples of the number to false using a loop.
+                let mut j: u64 = i * i;
+                while j < sieve.len() as u64 {
+                    sieve[j as usize] = false;
+                    j += i * 2;
+                }
+            }
+        }
+
+        // Return the sieve.
+        sieve
+    }
+
 }
 
 // The main function.
@@ -108,13 +134,50 @@ fn main() {
     // Initialise a counter for the number of iterations
     let mut iterations: u64 = 0;
 
+    // Run the iterator veriosn for 5 seconds.
     while Instant::now().duration_since(start).as_secs() < 5 {
         // Mark the sieve.
-        primes = sieve.mark_sieve();
+        primes = sieve.mark_sieve_iterator();
 
         // Increment the number of iterations.
         iterations += 1;
     }
+
+    // Print that this is the iterator version.
+    println!("Iterator version");
+
+    // Print the number of primes.
+    println!("Primes        : {}", primes.iter().filter(|&x| *x).count().to_formatted_string(&Locale::en));
+
+    // Print the prime numbers on a single line.
+    if cfg!(debug_assertions) {
+        print!("Prime nums    : ");
+        primes.iter().enumerate().for_each(|(i, x)| {
+            if *x {
+                print!("{} ", i);
+            }
+        });
+        println!();
+    }
+
+    // Print the number of iterations with commas as thousands separators.
+    println!("Iterations    : {}", iterations.to_formatted_string(&Locale::en));
+
+    // Reset the start time and iterations.
+    let start: Instant = Instant::now();
+    iterations = 0;
+
+    // Run the loop version for 5 seconds.
+    while Instant::now().duration_since(start).as_secs() < 5 {
+        // Mark the sieve.
+        primes = sieve.mark_sieve_loop();
+
+        // Increment the number of iterations.
+        iterations += 1;
+    }
+
+    // Print that this is the loop version.
+    println!("Loop version");
 
     // Print the number of primes.
     println!("Primes        : {}", primes.iter().filter(|&x| *x).count().to_formatted_string(&Locale::en));
