@@ -28,6 +28,7 @@ cargo build --release --no-default-features
 cd ..
 
 # Generate the README.md file
+echo "[![Build and Run](https://github.com/schleising/prime-sieve/actions/workflows/build_and_run.yaml/badge.svg)](https://github.com/schleising/prime-sieve/actions/workflows/build_and_run.yaml)" >> README.md
 echo "# Prime Sieve Benchmark" >> README.md
 echo "" >> README.md
 echo "## Python" >> README.md
