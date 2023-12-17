@@ -1,28 +1,40 @@
 #!/bin/zsh
 
 # Remove the old executables
-rm -rf ./C++
-rm -rf ./go
-rm -rf ./target
+rm -rf ./cpp/C++
+rm -rf ./go/go
+rm -rf ./rust/target
 
 # Run the C++ version
-mkdir -p ./C++
-clang++ -O3 -DNDEBUG prime-sieve.cpp -o ./C++/prime-sieve
+mkdir -p ./cpp/C++
+clang++ -O3 -DNDEBUG ./cpp/prime-sieve.cpp -o ./cpp/C++/prime-sieve
+
+# Change to the Go directory
+cd ./go
 
 # Build the Go code
-go build -ldflags="-w -s" -o ./go/prime-sieve prime-sieve.go
+go build -ldflags="-w -s" -o ./go/prime-sieve ./prime-sieve.go
+
+# Change back to the root directory
+cd ..
+
+# Change to the Rust directory
+cd ./rust
 
 # Build the Rust code
 cargo build --release --no-default-features
 
+# Change back to the root directory
+cd ..
+
 # Run the Python version
-python prime-sieve.py
+python ./python/prime-sieve.py
 
 # Run the C++ version
-./C++/prime-sieve
+./cpp/C++/prime-sieve
 
 # Run the Go version
-./go/prime-sieve
+./go/go/prime-sieve
 
 # Run the Rust version
-./target/release/prime-sieve
+./rust/target/release/prime-sieve
