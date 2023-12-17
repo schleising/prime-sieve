@@ -1,5 +1,5 @@
 module schleising.net/prime_sieve
 
-go 1.21.3
+go 1.21.5
 
-require golang.org/x/text v0.13.0
+require golang.org/x/text v0.14.0
