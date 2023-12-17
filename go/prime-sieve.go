@@ -130,5 +130,5 @@ func main() {
 	p.Printf("Iterations:  %v\n", iterations)
 
 	// Print a blank line
-	println()
+	p.Println()
 }
