@@ -1,5 +1,3 @@
-#!/bin/zsh
-
 # Remove the old executables
 rm -rf ./cpp/C++
 rm -rf ./go/go
