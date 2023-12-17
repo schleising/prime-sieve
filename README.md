@@ -1,3 +1,4 @@
+[![Build and Run](https://github.com/schleising/prime-sieve/actions/workflows/build_and_run.yaml/badge.svg)](https://github.com/schleising/prime-sieve/actions/workflows/build_and_run.yaml)
 # Prime Sieve Benchmark
 
 ## Python
@@ -7,7 +8,7 @@ Upper bound: 10,000,000
 
 Primes:      664,579
 
-Iterations:  13
+Iterations:  12
 
 
 
@@ -18,7 +19,7 @@ Upper bound: 10000000
 
 Primes:      664579
 
-Iterations:  367
+Iterations:  370
 
 
 
@@ -30,7 +31,7 @@ Upper bound: 10,000,000
 
 Primes:      664,579
 
-Iterations:  670
+Iterations:  680
 
 
 
@@ -51,7 +52,7 @@ Iterations    : 567
 
 Primes        : 664,579
 
-Iterations    : 654
+Iterations    : 655
 
 
 
