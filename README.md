@@ -19,7 +19,7 @@ Upper bound: 10000000
 
 Primes:      664579
 
-Iterations:  370
+Iterations:  369
 
 
 
@@ -31,7 +31,7 @@ Upper bound: 10,000,000
 
 Primes:      664,579
 
-Iterations:  680
+Iterations:  682
 
 
 
@@ -46,13 +46,13 @@ Stop index    : 3,163
 
 Primes        : 664,579
 
-Iterations    : 567
+Iterations    : 818
 
 ### Loop version
 
 Primes        : 664,579
 
-Iterations    : 655
+Iterations    : 820
 
 
 
